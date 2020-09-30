@@ -1,0 +1,4 @@
+MYSQL_USERNAME="xxxxx"
+MYSQL_PASSWORD="xxxxx"
+DB_NAME="xxxxx"
+MYSQL_HOST="xxxxx"
