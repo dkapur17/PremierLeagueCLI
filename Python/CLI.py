@@ -20,14 +20,16 @@ while(1):
                               password=MYSQL_PASSWORD, db=DB_NAME, cursorclass=pymysql.cursors.DictCursor)
         tmp = sp.call('clear', shell=True)
 
-        if(con.open)
+        if con.open:
             print("Connected")
         else:
             print("Failed to connect")
-        
-        tmp = input("Enter any key to CONTINUE>")
 
-        while con:
-            cur = con.cursor()
-            while(1):
-                tmp = sp.call('clear')
+        tmp = input("Enter any key to CONTINUE>")
+        break
+
+    except:
+        tmp = sp.call('clear', shell=True)
+        print("Connection Refused: Either username or password is incorrect or you don't have the permissions to access the database")
+        tmp = input("Enter any key to CONTINUE")
+        break
