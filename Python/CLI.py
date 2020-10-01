@@ -84,7 +84,7 @@ def goalsScored():
     tmp = sp.call('clear', shell=True)
     print("Goals Scored: ")
     print()
-    query = """SELECT PLAYERS.`First Name`, PLAYERS.`Last Name`, PLAYERS.`Club Name`, PLAYERS_OUTFIELD.`Goals Scored` FROM PLAYERS, PLAYERS_OUTFIELD WHERE PLAYERS.`Club Name` = PLAYERS_OUTFIELD.`Club Name` AND PLAYERS.`Jersey Number` = PLAYERS_OUTFIELD.`Jersey Number` ORDER BY PLAYERS_OUTFIELD.`Goals Scored` DESC;"""
+    query = """SELECT PLAYERS.`First Name`, PLAYERS.`Last Name`, PLAYERS.`Club Name`, PLAYERS_OUTFIELD.`Goals Scored` FROM PLAYERS, PLAYERS_OUTFIELD WHERE PLAYERS.`Club Name` = PLAYERS_OUTFIELD.`Club Name` AND PLAYERS.`Jersey Number` = PLAYERS_OUTFIELD.`Jersey Number` AND PLAYERS_OUTFIELD.`Goals Scored` > 0 ORDER BY PLAYERS_OUTFIELD.`Goals Scored` DESC;"""
     cur.execute(query)
     table = cur.fetchall()
     print(tabulate(table, headers="keys", tablefmt='psql'))
@@ -94,7 +94,7 @@ def assistsProvided():
     tmp = sp.call('clear', shell=True)
     print("Assists Provided: ")
     print()
-    query = """SELECT PLAYERS.`First Name`, PLAYERS.`Last Name`, PLAYERS.`Club Name`, PLAYERS_OUTFIELD.`Assists Provided` FROM PLAYERS, PLAYERS_OUTFIELD WHERE PLAYERS.`Club Name` = PLAYERS_OUTFIELD.`Club Name` AND PLAYERS.`Jersey Number` = PLAYERS_OUTFIELD.`Jersey Number` ORDER BY PLAYERS_OUTFIELD.`Assists Provided` DESC;"""
+    query = """SELECT PLAYERS.`First Name`, PLAYERS.`Last Name`, PLAYERS.`Club Name`, PLAYERS_OUTFIELD.`Assists Provided` FROM PLAYERS, PLAYERS_OUTFIELD WHERE PLAYERS.`Club Name` = PLAYERS_OUTFIELD.`Club Name` AND PLAYERS.`Jersey Number` = PLAYERS_OUTFIELD.`Jersey Number` AND PLAYERS_OUTFIELD.`Assists Provided` > 0 ORDER BY PLAYERS_OUTFIELD.`Assists Provided` DESC;"""
     cur.execute(query)
     table = cur.fetchall()
     print(tabulate(table, headers="keys", tablefmt='psql'))
@@ -104,7 +104,7 @@ def tacklesWon():
     tmp = sp.call('clear', shell=True)
     print("Tackles Won: ")
     print()
-    query = """SELECT PLAYERS.`First Name`, PLAYERS.`Last Name`, PLAYERS.`Club Name`, PLAYERS_OUTFIELD.`Tackles Won` FROM PLAYERS, PLAYERS_OUTFIELD WHERE PLAYERS.`Club Name` = PLAYERS_OUTFIELD.`Club Name` AND PLAYERS.`Jersey Number` = PLAYERS_OUTFIELD.`Jersey Number` ORDER BY PLAYERS_OUTFIELD.`Tackles Won` DESC;"""
+    query = """SELECT PLAYERS.`First Name`, PLAYERS.`Last Name`, PLAYERS.`Club Name`, PLAYERS_OUTFIELD.`Tackles Won` FROM PLAYERS, PLAYERS_OUTFIELD WHERE PLAYERS.`Club Name` = PLAYERS_OUTFIELD.`Club Name` AND PLAYERS.`Jersey Number` = PLAYERS_OUTFIELD.`Jersey Number` AND PLAYERS_OUTFIELD.`Tackles Won` > 0 ORDER BY PLAYERS_OUTFIELD.`Tackles Won` DESC;"""
     cur.execute(query)
     table = cur.fetchall()
     print(tabulate(table, headers="keys", tablefmt='psql'))
@@ -114,7 +114,7 @@ def goalsSaved():
     tmp = sp.call('clear', shell=True)
     print("Saves Stats: ")
     print()
-    query = """SELECT PLAYERS.`First Name`, PLAYERS.`Last Name`, PLAYERS.`Club Name`, PLAYERS_GOALKEEPER.`Saves` FROM PLAYERS, PLAYERS_GOALKEEPER WHERE PLAYERS.`Club Name` = PLAYERS_GOALKEEPER.`Club Name` AND PLAYERS.`Jersey Number` = PLAYERS_GOALKEEPER.`Jersey Number` ORDER BY PLAYERS_GOALKEEPER.`Saves` DESC;"""
+    query = """SELECT PLAYERS.`First Name`, PLAYERS.`Last Name`, PLAYERS.`Club Name`, PLAYERS_GOALKEEPER.`Saves` FROM PLAYERS, PLAYERS_GOALKEEPER WHERE PLAYERS.`Club Name` = PLAYERS_GOALKEEPER.`Club Name` AND PLAYERS.`Jersey Number` = PLAYERS_GOALKEEPER.`Jersey Number` AND PLAYERS_GOALKEEPER.`Saves` > 0 ORDER BY PLAYERS_GOALKEEPER.`Saves` DESC;"""
     cur.execute(query)
     table = cur.fetchall()
     print(tabulate(table, headers="keys", tablefmt='psql'))
@@ -124,7 +124,7 @@ def cleanSheets():
     tmp = sp.call('clear', shell=True)
     print("Saves Stats: ")
     print()
-    query = """SELECT PLAYERS.`First Name`, PLAYERS.`Last Name`, PLAYERS.`Club Name`, PLAYERS_GOALKEEPER.`Clean Sheets` FROM PLAYERS, PLAYERS_GOALKEEPER WHERE PLAYERS.`Club Name` = PLAYERS_GOALKEEPER.`Club Name` AND PLAYERS.`Jersey Number` = PLAYERS_GOALKEEPER.`Jersey Number` ORDER BY PLAYERS_GOALKEEPER.`Clean Sheets` DESC;"""
+    query = """SELECT PLAYERS.`First Name`, PLAYERS.`Last Name`, PLAYERS.`Club Name`, PLAYERS_GOALKEEPER.`Clean Sheets` FROM PLAYERS, PLAYERS_GOALKEEPER WHERE PLAYERS.`Club Name` = PLAYERS_GOALKEEPER.`Club Name` AND PLAYERS.`Jersey Number` = PLAYERS_GOALKEEPER.`Jersey Number` AND PLAYERS_GOALKEEPER.`Clean Sheets` > 0 ORDER BY PLAYERS_GOALKEEPER.`Clean Sheets` DESC;"""
     cur.execute(query)
     table = cur.fetchall()
     print(tabulate(table, headers="keys", tablefmt='psql'))
@@ -155,6 +155,10 @@ def managerInfo():
     print(tabulate(table, headers="keys", tablefmt='psql'))
 
 
+def matchResults():
+    print("To Do")
+
+
 def updatePlayerGoals():
     print("To Do")
 
@@ -177,7 +181,7 @@ def dispatch(ch):
     elif ch == 4:
         managerInfo()
     elif ch == 5:
-        goalsSaved()
+        matchResults()
     elif ch == 6:
         updatePlayerGoals()
     elif ch == 7:

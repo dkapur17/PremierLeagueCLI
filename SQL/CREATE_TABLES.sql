@@ -46,8 +46,8 @@ CREATE TABLE `MANAGERS` (
 CREATE TABLE `STADIUMS` (
   `Name` VARCHAR(255) PRIMARY KEY,
   `Address` VARCHAR(255),
-  `Longitude` decimal(10, 3),
-  `Latitude` decimal(10, 3),
+  `Longitude` DECIMAL(10, 3),
+  `Latitude` DECIMAL(10, 3),
   `Capacity` INT DEFAULT 100000,
   `Broke Ground` DATE
 );
