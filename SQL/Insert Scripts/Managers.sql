@@ -1,4 +1,4 @@
-INSERT INTO MANAGERS VALUES('Mikel', NULL, 'Arteta',' Arsenal', '1982-03-26');
+INSERT INTO MANAGERS VALUES('Mikel', NULL, 'Arteta','Arsenal', '1982-03-26');
 INSERT INTO MANAGERS VALUES('Dean', NULL, 'Smith', 'Aston Villa', '1971-03-19');
 INSERT INTO MANAGERS VALUES('Graham', NULL, 'Potter', 'Brighton', '1975-05-20');
 INSERT INTO MANAGERS VALUES('Frank', NULL, 'Lampard', 'Chelsea', '1978-06-20');
