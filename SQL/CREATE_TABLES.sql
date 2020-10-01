@@ -49,7 +49,7 @@ CREATE TABLE `STADIUMS` (
   `Longitude` DECIMAL(10, 3),
   `Latitude` DECIMAL(10, 3),
   `Capacity` INT DEFAULT 100000,
-  `Broke Ground` DATE
+  `Broke Ground` INT
 );
 CREATE TABLE `KITS` (
   `Club Name` VARCHAR(255) NOT NULL,
