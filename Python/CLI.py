@@ -23,19 +23,136 @@ def showLeagueTable():
 
 
 def clubPlayers():
-    print("To Do")
+    print("Players of a Club: ")
+    print()
+    clubName = input("Club Name (Leave empty for all Clubs): ")
+    if len(clubName):
+        query = """SELECT Name FROM CLUBS WHERE `Name` = %s;"""
+        cur.execute(query, (clubName))
+        res = cur.fetchone()
+    else:
+        query = """SELECT Name FROM CLUBS;"""
+        cur.execute(query)
+        res = cur.fetchall()
+    if not res:
+        print("No Such Club")
+        return
+    if len(clubName):
+        query = """SELECT * FROM PLAYERS WHERE `Club Name` = %s;"""
+        cur.execute(query, (clubName))
+    else:
+        query = """SELECT * FROM PLAYERS;"""
+        cur.execute(query)
+    table = cur.fetchall()
+    print(tabulate(table, headers="keys", tablefmt='psql'))
+
+
+def playerStats():
+    ch = 10
+    print("Choose a stat: ")
+    print("1. Goals Scored")
+    print("2. Assists Provided")
+    print("3. Tackles Won")
+    print("4. Saves")
+    print("5. Clean Sheets")
+    print("6. Back")
+    while ch > 6:
+        try:
+            ch = int(input("Enter choice > "))
+            if ch > 6:
+                continue
+            elif ch < 1:
+                ch = 10
+                continue
+        except ValueError:
+            continue
+    if ch == 1:
+        goalsScored()
+    elif ch == 2:
+        assistsProvided()
+    elif ch == 3:
+        tacklesWon()
+    elif ch == 4:
+        goalsSaved()
+    elif ch == 5:
+        cleanSheets()
+    else:
+        return True
 
 
 def goalsScored():
-    print("To Do")
+    tmp = sp.call('clear', shell=True)
+    print("Goals Scored: ")
+    print()
+    query = """SELECT PLAYERS.`First Name`, PLAYERS.`Last Name`, PLAYERS.`Club Name`, PLAYERS_OUTFIELD.`Goals Scored` FROM PLAYERS, PLAYERS_OUTFIELD WHERE PLAYERS.`Club Name` = PLAYERS_OUTFIELD.`Club Name` AND PLAYERS.`Jersey Number` = PLAYERS_OUTFIELD.`Jersey Number` ORDER BY PLAYERS_OUTFIELD.`Goals Scored` DESC;"""
+    cur.execute(query)
+    table = cur.fetchall()
+    print(tabulate(table, headers="keys", tablefmt='psql'))
+
+
+def assistsProvided():
+    tmp = sp.call('clear', shell=True)
+    print("Assists Provided: ")
+    print()
+    query = """SELECT PLAYERS.`First Name`, PLAYERS.`Last Name`, PLAYERS.`Club Name`, PLAYERS_OUTFIELD.`Assists Provided` FROM PLAYERS, PLAYERS_OUTFIELD WHERE PLAYERS.`Club Name` = PLAYERS_OUTFIELD.`Club Name` AND PLAYERS.`Jersey Number` = PLAYERS_OUTFIELD.`Jersey Number` ORDER BY PLAYERS_OUTFIELD.`Assists Provided` DESC;"""
+    cur.execute(query)
+    table = cur.fetchall()
+    print(tabulate(table, headers="keys", tablefmt='psql'))
+
+
+def tacklesWon():
+    tmp = sp.call('clear', shell=True)
+    print("Tackles Won: ")
+    print()
+    query = """SELECT PLAYERS.`First Name`, PLAYERS.`Last Name`, PLAYERS.`Club Name`, PLAYERS_OUTFIELD.`Tackles Won` FROM PLAYERS, PLAYERS_OUTFIELD WHERE PLAYERS.`Club Name` = PLAYERS_OUTFIELD.`Club Name` AND PLAYERS.`Jersey Number` = PLAYERS_OUTFIELD.`Jersey Number` ORDER BY PLAYERS_OUTFIELD.`Tackles Won` DESC;"""
+    cur.execute(query)
+    table = cur.fetchall()
+    print(tabulate(table, headers="keys", tablefmt='psql'))
+
+
+def goalsSaved():
+    tmp = sp.call('clear', shell=True)
+    print("Saves Stats: ")
+    print()
+    query = """SELECT PLAYERS.`First Name`, PLAYERS.`Last Name`, PLAYERS.`Club Name`, PLAYERS_GOALKEEPER.`Saves` FROM PLAYERS, PLAYERS_GOALKEEPER WHERE PLAYERS.`Club Name` = PLAYERS_GOALKEEPER.`Club Name` AND PLAYERS.`Jersey Number` = PLAYERS_GOALKEEPER.`Jersey Number` ORDER BY PLAYERS_GOALKEEPER.`Saves` DESC;"""
+    cur.execute(query)
+    table = cur.fetchall()
+    print(tabulate(table, headers="keys", tablefmt='psql'))
+
+
+def cleanSheets():
+    tmp = sp.call('clear', shell=True)
+    print("Saves Stats: ")
+    print()
+    query = """SELECT PLAYERS.`First Name`, PLAYERS.`Last Name`, PLAYERS.`Club Name`, PLAYERS_GOALKEEPER.`Clean Sheets` FROM PLAYERS, PLAYERS_GOALKEEPER WHERE PLAYERS.`Club Name` = PLAYERS_GOALKEEPER.`Club Name` AND PLAYERS.`Jersey Number` = PLAYERS_GOALKEEPER.`Jersey Number` ORDER BY PLAYERS_GOALKEEPER.`Clean Sheets` DESC;"""
+    cur.execute(query)
+    table = cur.fetchall()
+    print(tabulate(table, headers="keys", tablefmt='psql'))
 
 
 def managerInfo():
-    print("To Do")
-
-
-def goalSaved():
-    print("To Do")
+    print("Manager of a Club: ")
+    print()
+    clubName = input("Club Name (Leave empty for all Clubs): ")
+    if len(clubName):
+        query = """SELECT Name FROM CLUBS WHERE `Name` = %s;"""
+        cur.execute(query, (clubName))
+        res = cur.fetchone()
+    else:
+        query = """SELECT Name FROM CLUBS;"""
+        cur.execute(query)
+        res = cur.fetchall()
+    if not res:
+        print("No Such Club")
+        return
+    if len(clubName):
+        query = """SELECT * FROM MANAGERS WHERE `Club Name` = %s;"""
+        cur.execute(query, (clubName))
+    else:
+        query = """SELECT * FROM MANAGERS;"""
+        cur.execute(query)
+    table = cur.fetchall()
+    print(tabulate(table, headers="keys", tablefmt='psql'))
 
 
 def updatePlayerGoals():
@@ -56,7 +173,7 @@ def dispatch(ch):
     elif ch == 2:
         clubPlayers()
     elif ch == 3:
-        goalsScored()
+        return playerStats()
     elif ch == 4:
         managerInfo()
     elif ch == 5:
@@ -90,10 +207,10 @@ while True:
                 print("Premier League CLI")
                 print("----------Queries----------")
                 print("1. View League Table")
-                print("2. Club Players")
-                print("3. Goals Scored Stats")
+                print("2. Player List of a Club")
+                print("3. Player Performance Stats")
                 print("4. Manager Info")
-                print("5. Goals Saved Stats")
+                print("5. Match Results")
                 print("----------Updates----------")
                 print("6. Update Goals Scored by a Player")
                 print("7. Insert New Match")
@@ -106,14 +223,18 @@ while True:
                         ch = int(input("Enter choice > "))
                         if ch > 9:
                             continue
+                        elif ch < 1:
+                            ch = 100
+                            continue
                     except ValueError:
                         continue
-                    tmp = sp.call('clear', shell=True)
+                tmp = sp.call('clear', shell=True)
                 if ch == 9:
                     exit(0)
                 else:
-                    dispatch(ch)
-                    tmp = input("Enter any key to CONTINUE > ")
+                    back = dispatch(ch)
+                    if not back:
+                        tmp = input("Enter any key to CONTINUE > ")
 
     except Exception as e:
         tmp = sp.call('clear', shell=True)
