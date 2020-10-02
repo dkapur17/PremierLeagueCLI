@@ -5,4 +5,3 @@ INSERT INTO STADIUMS VALUES("St. James' Park",'Newcastle upon Tyne',-1.37,54.58,
 INSERT INTO STADIUMS VALUES("St. Mary's Stadium",'Britannia Rd. Southampton,England',-1.23,50.54,32384,2000);
 INSERT INTO STADIUMS VALUES('Tottenham Hotspur Stadium','Tottenham, London',-0.03,51.36,62303,2019);
 INSERT INTO STADIUMS VALUES('London Stadium','Queen Elizabeth Olympic Park, Stratford, London',-0.01,51.32,60000,2008);
-INSERT INTO STADIUMS VALUES('Anfieldddd','Anfiled,Liverpool,Merseyside,England',-2.57,53.25,53394,1884);
