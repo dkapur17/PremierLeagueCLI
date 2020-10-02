@@ -1,7 +1,15 @@
 INSERT INTO STADIUMS VALUES('Anfield','Anfiled,Liverpool,Merseyside,England',-2.57,53.25,53394,1884);
 INSERT INTO STADIUMS VALUES('Etihad Stadium','Etihad Campus, Manchester,England',-2.12,53.28,55017,1999);
 INSERT INTO STADIUMS VALUES('Old Trafford','Sir Matt Busby Wat,Old Trafford,Greater Manchester,England',-2.17,53.27,74140,1909);
-INSERT INTO STADIUMS VALUES("St. James' Park",'Newcastle upon Tyne',-1.37,54.58,52305,1892);
+INSERT INTO STAIDUMS VALUES("St. James' Park",'Newcastle upon Tyne',-1.37,54.58,52305,1892);
 INSERT INTO STADIUMS VALUES("St. Mary's Stadium",'Britannia Rd. Southampton,England',-1.23,50.54,32384,2000);
 INSERT INTO STADIUMS VALUES('Tottenham Hotspur Stadium','Tottenham, London',-0.03,51.36,62303,2019);
 INSERT INTO STADIUMS VALUES('London Stadium','Queen Elizabeth Olympic Park, Stratford, London',-0.01,51.32,60000,2008);
+INSERT INTO STADIUMS VALUES('Emirates Stadium','Highbury House, 75 Drayton Park,Highbury, London',-6.22,51.33,60704,2004);
+INSERT INTO STADIUMS VALUES('Villa Park','Trinity Road, Birmingham',-1.53,52.30,42749,1897);
+INSERT INTO STADIUMS VALUES('Amex Stadium','Falmer, Brighton, East Sussex',-0.4,42.56,30750,2008);
+INSERT INTO STADIUMS VALUES('Stamford Bridge','Fulham, London',-0.11,51.28,40834,1876);
+INSERT INTO STADIUMS VALUES('Selhurst Park','Selhurst, London',-0.58,51.23,25496,1922);
+INSERT INTO STADIUMS VALUES('Goodison Park','Goodison Road Walton, Liverpool',-2.57,53.26,39414,1892);
+INSERT INTO STADIUMS VALUES('Elland Road','Elland Road, Beeston, Leeds',-1.34,53.46,37792,1897);
+INSERT INTO STADIUMS VALUES('King Power Stadium','Filbert Way, Leicester',-1.8,52.37,32261,2002);
