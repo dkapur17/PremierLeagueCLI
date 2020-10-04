@@ -1,0 +1,30 @@
+INSERT INTO `ALTERNATE NAMES`
+VALUES("The Foxes", "Leicester City");
+INSERT INTO `ALTERNATE NAMES`
+VALUES("The Reds", "Liverpool");
+INSERT INTO `ALTERNATE NAMES`
+VALUES("The Toffees", "Everton");
+INSERT INTO `ALTERNATE NAMES`
+VALUES("The Villa", "Aston Villa");
+INSERT INTO `ALTERNATE NAMES`
+VALUES("The Gunners", "Arsenal");
+INSERT INTO `ALTERNATE NAMES`
+VALUES("The Eagles", "Crystal Palace");
+INSERT INTO `ALTERNATE NAMES`
+VALUES("The Peacocks", "Leeds United");
+INSERT INTO `ALTERNATE NAMES`
+VALUES("Spurs", "Tottenham");
+INSERT INTO `ALTERNATE NAMES`
+VALUES("The Blues", "Chelsea");
+INSERT INTO `ALTERNATE NAMES`
+VALUES("The Magpies", "Newcastle");
+INSERT INTO `ALTERNATE NAMES`
+VALUES("The Hammers", "West Ham");
+INSERT INTO `ALTERNATE NAMES`
+VALUES("The Seagulls", "Brighton");
+INSERT INTO `ALTERNATE NAMES`
+VALUES("The Citizens", "Manchester City");
+INSERT INTO `ALTERNATE NAMES`
+VALUES("The Red Devils", "Manchester United");
+INSERT INTO `ALTERNATE NAMES`
+VALUES("The Saints", "Southampton");
