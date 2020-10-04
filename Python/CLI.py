@@ -204,7 +204,36 @@ def viewFixtures():
     print(tabulate(table, headers="keys", tablefmt='psql'))
 
 
+def viewAlternateNames():
+    print("Club Alternate Names: ")
+    print()
+    clubName = input("Club Name (Leave empty for all Clubs): ")
+    if len(clubName):
+        query = """SELECT Name FROM CLUBS WHERE `Name` = %s;"""
+        cur.execute(query, (clubName))
+        res = cur.fetchone()
+    else:
+        query = """SELECT Name FROM CLUBS;"""
+        cur.execute(query)
+        res = cur.fetchall()
+    if not res:
+        print("No Such Club")
+        return
+    if len(clubName):
+        query = """SELECT * FROM `ALTERNATE NAMES` WHERE `Club` = %s;"""
+        cur.execute(query, (clubName))
+    else:
+        query = """SELECT * FROM `ALTERNATE NAMES`;"""
+        cur.execute(query)
+    table = cur.fetchall()
+    if len(table):
+        print(tabulate(table, headers="keys", tablefmt='psql'))
+    else:
+        print("This Club has no Alternate Names")
+
 # Delete Queries
+
+
 def deletePlayer():
     print("Delete Player: ")
     print()
@@ -624,7 +653,7 @@ def insertPlayer():
     fName = input("First Name: ")
     mName = input("Middle Name: ")
     lName = input("Last Name: ")
-    clubName = input("Managing the club: ")
+    clubName = input("Club Name: ")
     jNo = input("Jersey Number: ")
     dob = input("Date of Birth (yyyy-mm-dd): ")
     marketValue = input("Market Value of player: ")
@@ -638,6 +667,11 @@ def insertPlayer():
     except Exception as e:
         print("Could not insert into the database. Check inputted values.")
         return
+    query = """SELECT * FROM PLAYERS WHERE `Club Name` = %s AND `Jersey Number` = %s;"""
+    cur.execute(query, (clubName, jNo))
+    res = cur.fetchall()
+    print("The following entry has been inserted into the database: ")
+    print(tabulate(res, headers="keys", tablefmt='psql'))
 
 
 def insertManager():
@@ -654,8 +688,13 @@ def insertManager():
         cur.execute(query, (fName, mName, lName, clubName, dob))
         connection.commit()
     except Exception as e:
-        print("Could not insert into the database. Check inputted values.")
+        print("Could not insert into the database. Entry may not be unique or inputs may be of the wrong type.")
         return
+    query = """SELECT * FROM MANAGERS WHERE `Club Name` = %s;"""
+    cur.execute(query, (clubName))
+    res = cur.fetchall()
+    print("The following entry has been inserted into the database: ")
+    print(tabulate(res, headers="keys", tablefmt='psql'))
 
 
 def insertMatch():
@@ -720,6 +759,8 @@ def dispatchQuery(ch):
         matchResults()
     elif ch == 6:
         viewFixtures()
+    elif ch == 7:
+        viewAlternateNames()
 
 
 def dispatchDelete(ch):
@@ -749,7 +790,7 @@ def dispatchInsert(ch):
 
 def view():
     ch = 1e9
-    while ch != 7:
+    while ch != 8:
         sp.call('clear', shell=True)
         print("View Existing Entries")
         print()
@@ -760,15 +801,16 @@ def view():
         print("4. Manager Info")
         print("5. Match Results")
         print("6. View Fixtures")
-        print("7. Back")
-        while ch > 7 or ch < 1:
+        print("7. Club Alternate Names")
+        print("8. Back")
+        while ch > 8 or ch < 1:
             try:
                 ch = int(input("Enter a choice: "))
             except ValueError:
                 continue
-            if ch == 7:
+            if ch == 8:
                 break
-            elif ch > 7 or ch < 1:
+            elif ch > 8 or ch < 1:
                 continue
             else:
                 sp.call('clear', shell=True)
