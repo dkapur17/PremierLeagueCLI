@@ -198,7 +198,7 @@ def matchResults():
 def viewFixtures():
     print("Fixtures: ")
     print()
-    query = """SELECT * FROM FIXTURES;"""
+    query = """SELECT F.`Match ID`, F.`Home Club`, F.`Away Club`, F.`Home Club Kit`, F.`Away Club Kit`, CS.`Stadium Name` FROM FIXTURES AS F, `CLUB-STADIUM` AS CS WHERE F.`Home Club` = CS.`Club Name` ORDER BY F.`Match ID`;"""
     cur.execute(query)
     table = cur.fetchall()
     print(tabulate(table, headers="keys", tablefmt='psql'))
