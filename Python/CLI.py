@@ -616,6 +616,20 @@ def updateFixtureKits():
     return
 
 
+# Insert Functions
+
+def insertPlayer():
+    print("TODO")
+
+
+def insertManager():
+    print("TODO")
+
+
+def insertMatch():
+    print("TODO")
+
+
 def dispatchQuery(ch):
     if ch == 1:
         showLeagueTable()
@@ -645,6 +659,15 @@ def dispatchUpdate(ch):
         updateStadiumCapacity()
     elif ch == 3:
         updateFixtureKits()
+
+
+def dispatchInsert(ch):
+    if ch == 1:
+        insertPlayer()
+    elif ch == 2:
+        insertManager()
+    elif ch == 3:
+        insertMatch()
 
 
 def view():
@@ -681,7 +704,33 @@ def view():
 
 
 def insert():
-    print("TODO")
+    ch = 1e9
+    while ch != 4:
+        sp.call('clear', shell=True)
+        print("Insert new entry into the Database")
+        print()
+        print("Choose one of the options: ")
+        print("1. Insert New Player")
+        print("2. Insert New Manager")
+        print("3. Insert New Match")
+        print("4. Back")
+        while ch > 4 or ch < 1:
+            try:
+                ch = int(input("Enter a choice: "))
+            except ValueError:
+                continue
+            if ch == 4:
+                break
+            elif ch > 4 or ch < 1:
+                continue
+            else:
+                sp.call('clear', shell=True)
+                back = False
+                back = dispatchInsert(ch)
+                if not back:
+                    input("Enter any key to continue")
+                ch = 1e9
+                break
 
 
 def delete():
