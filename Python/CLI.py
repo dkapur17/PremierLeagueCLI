@@ -619,11 +619,43 @@ def updateFixtureKits():
 # Insert Functions
 
 def insertPlayer():
-    print("TODO")
+    print("Insert Player")
+    print()
+    fName = input("First Name: ")
+    mName = input("Middle Name: ")
+    lName = input("Last Name: ")
+    clubName = input("Managing the club: ")
+    jNo = input("Jersey Number: ")
+    dob = input("Date of Birth (yyyy-mm-dd): ")
+    marketValue = input("Market Value of player: ")
+    CDuration = input("Duration of Contract: ")
+    query = """INSERT INTO PLAYERS VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
+
+    try:
+        cur.execute(query, (fName, mName, lName, clubName,
+                            jNo, dob, marketValue, CDuration))
+        connection.commit()
+    except Exception as e:
+        print("Could not insert into the database. Check inputted values.")
+        return
 
 
 def insertManager():
-    print("TODO")
+    print("Insert Manager")
+    print()
+    fName = input("First Name: ")
+    mName = input("Middle Name: ")
+    lName = input("Last Name: ")
+    clubName = input("Managing the club: ")
+    dob = input("Date of Birth (yyyy-mm-dd): ")
+    query = """INSERT INTO MANAGERS VALUES (%s, %s, %s, %s, %s)"""
+
+    try:
+        cur.execute(query, (fName, mName, lName, clubName, dob))
+        connection.commit()
+    except Exception as e:
+        print("Could not insert into the database. Check inputted values.")
+        return
 
 
 def insertMatch():
