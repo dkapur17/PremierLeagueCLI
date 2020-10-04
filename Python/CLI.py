@@ -627,7 +627,52 @@ def insertManager():
 
 
 def insertMatch():
-    print("TODO")
+    print("Insert Match")
+    print()
+    matchId = input("Match ID (Corresponding to Fixture): ")
+    startTime = input("Start time of the match (hh:mm): ")
+    date = input("Match Date (yyyy-mm-dd): ")
+    hScore = input("Home Team Score: ")
+    aScore = input("Away Team Score: ")
+    datetime = f"{date} {startTime}:00"
+    query = """INSERT INTO MATCHES VALUES (%s, %s, %s, %s);"""
+    try:
+        cur.execute(query, (matchId, datetime, hScore, aScore))
+        connection.commit()
+    except Exception as e:
+        print("Could not insert into the database. Check inputted values.")
+        return
+    query = """SELECT `Home Club`, `Away Club` from FIXTURES WHERE `Match ID` = %s"""
+    cur.execute(query, (matchId))
+    res = cur.fetchall()[0]
+    hTeam = res['Home Club']
+    aTeam = res['Away Club']
+
+    # Case: draw
+    # Update goal count for home team
+    query = """UPDATE CLUBS SET `GF` = `GF` + %s, `GA` = `GA` + %s WHERE `Name` = %s;"""
+    cur.execute(query, (hScore, aScore, hTeam))
+    cur.execute(query, (aScore, hScore, aTeam))
+
+    if hScore == aScore:
+        query = """UPDATE CLUBS SET `D` = `D` + 1 WHERE `Name` = %s"""
+        cur.execute(query, (hTeam))
+        cur.execute(query, (aTeam))
+
+    elif hScore > aScore:
+        query1 = """UPDATE CLUBS SET `W` = `W` + 1 WHERE `Name` = %s"""
+        query2 = """UPDATE CLUBS SET `L` = `L` + 1 WHERE `Name` = %s"""
+        cur.execute(query1, (hTeam))
+        cur.execute(query2, (aTeam))
+    else:
+        query1 = """UPDATE CLUBS SET `W` = `W` + 1 WHERE `Name` = %s"""
+        query2 = """UPDATE CLUBS SET `L` = `L` + 1 WHERE `Name` = %s"""
+        cur.execute(query1, (aTeam))
+        cur.execute(query2, (hTeam))
+
+    connection.commit()
+
+    print("Successfully inserted into the database and updated the Club stats.")
 
 
 def dispatchQuery(ch):
